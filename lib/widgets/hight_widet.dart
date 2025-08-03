@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:my_bmi/models/color_model.dart';
 
 class HightWidet extends StatefulWidget {
-  HightWidet({super.key, required this.hight});
-  double hight;
+  const HightWidet({super.key, required this.hight, required this.onChanged});
+  final double hight;
+  final ValueChanged<double> onChanged;
+
   @override
   State<HightWidet> createState() => _HightWidetState();
 }
@@ -52,9 +54,7 @@ class _HightWidetState extends State<HightWidet> {
               Slider(
                 value: widget.hight,
                 onChanged: (value) {
-                  setState(() {
-                    widget.hight = value;
-                  });
+                  widget.onChanged(value);
                 },
                 min: 100,
                 max: 220,

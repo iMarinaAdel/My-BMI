@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:my_bmi/models/color_model.dart';
 
-class ItemWidget extends StatefulWidget {
-  ItemWidget({super.key, required this.text});
-  double weight = 70;
-  final String text;
+class WeightWidget extends StatefulWidget {
+  WeightWidget({super.key, required this.weight, required this.onChanged});
+  double weight;
+  final ValueChanged<double> onChanged;
   @override
-  State<ItemWidget> createState() => _ItemWidgetState();
+  State<WeightWidget> createState() => _AgeWidgetState();
 }
 
-class _ItemWidgetState extends State<ItemWidget> {
+class _AgeWidgetState extends State<WeightWidget> {
   final ColorModel colorModel = const ColorModel();
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -25,9 +24,9 @@ class _ItemWidgetState extends State<ItemWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(widget.text, style: TextStyle(color: colorModel.whiteColor)),
+              Text("Weight", style: TextStyle(color: colorModel.whiteColor)),
               Text(
-                "${widget.weight.toInt()}",
+                "${widget.weight.toInt()}", //
                 style: TextStyle(
                   color: colorModel.whiteColor,
                   fontWeight: FontWeight.bold,
@@ -42,7 +41,9 @@ class _ItemWidgetState extends State<ItemWidget> {
                       setState(() {
                         widget.weight++;
                       });
+                      widget.onChanged(widget.weight);
                     },
+
                     icon: Icon(Icons.add),
                     iconSize: 40,
                     style: IconButton.styleFrom(
@@ -56,7 +57,9 @@ class _ItemWidgetState extends State<ItemWidget> {
                       setState(() {
                         widget.weight--;
                       });
+                      widget.onChanged(widget.weight);
                     },
+
                     icon: Icon(Icons.remove),
                     iconSize: 40,
                     style: IconButton.styleFrom(
@@ -71,5 +74,6 @@ class _ItemWidgetState extends State<ItemWidget> {
         ),
       ),
     );
+    ;
   }
 }

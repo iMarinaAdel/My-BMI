@@ -3,9 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:my_bmi/models/color_model.dart';
 import 'package:my_bmi/screens/result_screen.dart';
+import 'package:my_bmi/widgets/age_widget.dart';
 import 'package:my_bmi/widgets/genderBox_widget.dart';
 import 'package:my_bmi/widgets/hight_widet.dart';
-import 'package:my_bmi/widgets/weight&age_widget.dart';
+import 'package:my_bmi/widgets/weight_widget.dart';
 
 class homeScreen extends StatefulWidget {
   const homeScreen({super.key});
@@ -18,6 +19,7 @@ class _homeScreenState extends State<homeScreen> {
   bool isMale = true;
   double hight = 170;
   double weight = 70;
+  double age = 20;
 
   final ColorModel colorModel = const ColorModel();
 
@@ -73,8 +75,37 @@ class _homeScreenState extends State<homeScreen> {
                 ],
               ),
             ),
-            HightWidet(hight: hight),
-            WeightAgewidget(),
+            HightWidet(
+              hight: hight,
+              onChanged: (value) {
+                setState(() {
+                  hight = value;
+                });
+              },
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  WeightWidget(
+                    weight: weight,
+                    onChanged: (value) {
+                      setState(() {
+                        weight = value;
+                      });
+                    },
+                  ),
+
+                  AgeWidget(
+                    age: age,
+                    onChanged: (value) {
+                      setState(() {
+                        age = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
 
             Padding(
               padding: const EdgeInsets.all(8.0),

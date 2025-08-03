@@ -18,11 +18,24 @@ class ResultScreen extends StatelessWidget {
     }
   }
 
+  String getmessage(double bmi) {
+    if (bmi < 18.5) {
+      return "You are underweight. Try to eat more healthy food and take care of your body.";
+    } else if (bmi < 25) {
+      return "Great! Your weight is healthy. Keep it up!";
+    } else if (bmi < 30) {
+      return "You are a bit overweight. Try to move more and eat healthier!";
+    } else {
+      return "Your weight is high. It’s time to start caring more about your health.";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorModel.bachgraoundColor,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: colorModel.whiteColor),
         shadowColor: colorModel.cardColor,
         elevation: 10,
         backgroundColor: colorModel.bachgraoundColor,
@@ -52,15 +65,27 @@ class ResultScreen extends StatelessWidget {
                     Text(
                       getResultCategory(bmi),
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 25,
                         color: colorModel.greenResultColor,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       bmi.toStringAsFixed(1),
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 70,
                         color: colorModel.whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Text(
+                        getmessage(bmi),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: colorModel.whiteColor,
+                        ),
                       ),
                     ),
                   ],
@@ -78,7 +103,9 @@ class ResultScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: colorModel.pinkColor,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: Text(
                   "Recaculate",
                   style: TextStyle(
